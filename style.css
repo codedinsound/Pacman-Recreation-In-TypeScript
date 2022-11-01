@@ -1,0 +1,194 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+html {
+  font-size: inherit;
+  background-color: black;
+}
+
+.app-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 75vh;
+  padding: 5px;
+  border: 1px solid white;
+}
+
+.worldLayout {
+  border: 5px solid blue;
+  margin: 5%;
+  width: 85%;
+  height: 85%;
+  padding: 1px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+.shape {
+  width: 6%;
+  height: 6%;
+}
+
+/* Defined Color Pallets  */
+.blue {
+  background-color: blue;
+}
+
+.red {
+  background-color: red;
+}
+
+.pink {
+  background-color: pink;
+}
+
+.black {
+  background-color: lightgreen;
+  /* opacity: 0.4; */
+}
+
+@keyframes tokenColorAnimation {
+  0% {
+    background-color: grey;
+  }
+
+  25% {
+    background-color: green;
+  }
+
+  50% {
+    background-color: red;
+  }
+
+  75% {
+    background-color: yellow;
+  }
+
+  100% {
+    background-color: black;
+  }
+}
+
+.token {
+  background-color: red;
+  margin: auto;
+  margin-top: 35%;
+  width: 30%;
+  height: 35%;
+  border-radius: 50%;
+  animation-name: tokenColorAnimation;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+}
+
+.power-token {
+  background-color: white;
+  margin: auto;
+  margin-top: 15%;
+  width: 50%;
+  height: 55%;
+  border-radius: 50%;
+}
+
+.pacman {
+  background-color: yellow;
+  border-radius: 50%;
+  height: 100%;
+  animation-name: mouthAnimation;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  clip-path: polygon(
+    100% 0,
+    100% 23%,
+    56% 50%,
+    100% 76%,
+    100% 100%,
+    0 100%,
+    0% 70%,
+    0 0
+  );
+}
+
+/* MARK: Animate Mouth Open and Close  */
+@keyframes mouthAnimation {
+  0% {
+    clip-path: none;
+  }
+
+  100% {
+    clip-path: polygon(
+      100% 0,
+      100% 23%,
+      56% 50%,
+      100% 76%,
+      100% 100%,
+      0 100%,
+      0% 70%,
+      0 0
+    );
+  }
+}
+
+.ArrowRight {
+  transform: rotateY(0deg);
+}
+
+.ArrowLeft {
+  transform: rotateY(180deg);
+}
+
+.ArrowUp {
+  transform: rotateZ(270deg);
+}
+
+.ArrowDown {
+  transform: rotateZ(90deg);
+}
+
+/* MARK: Points Container Display  */
+.points_container {
+  color: #fff;
+  width: 91%;
+  height: 3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.points_field {
+  text-align: center;
+}
+
+.points_life {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Pacman Ghost */
+.ghost {
+  margin: auto;
+  margin-top: 15%;
+  border-radius: 30%;
+  width: 90%;
+  height: 75%;
+  clip-path: polygon(
+    50% 0%,
+    100% 0,
+    100% 35%,
+    100% 100%,
+    74% 60%,
+    50% 100%,
+    30% 65%,
+    0 100%,
+    0 0,
+    2% 0
+  );
+}
