@@ -98,6 +98,8 @@ class Pacman extends Shape implements MovingComponent {
   // MARK: Eat the Power Token
   private eatPowerToken(): void {}
 
+  // MARK: Eat the Ghost if Power Token Is Eaten
+
   // MARK: Move Pacman
   movePacman({ world, engine }) {
     const { row, col } = this.getVector; //
