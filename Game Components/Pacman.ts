@@ -5,6 +5,7 @@ import Utils from '../Utils';
 class Pacman extends Shape implements MovingComponent {
   private isMoving: boolean;
   private direction: string;
+  private canEatGhost: boolean;
 
   constructor() {
     super();
@@ -13,6 +14,7 @@ class Pacman extends Shape implements MovingComponent {
 
     this.isMoving = false;
     this.direction = 'ArrowRight';
+    this.canEatGhost = false;
   }
 
   // MARK: Change Pacmans Direction and Update UI
@@ -42,7 +44,7 @@ class Pacman extends Shape implements MovingComponent {
   // 1  - Ghost
   // 2  - Token
   // 3  - Power Up
-  // 4  - Wall //
+  // 4  - Wall
 
   // MARK: Check Obstacle
   checkObstacle2({ grid, engine }, row, col): boolean {
@@ -55,14 +57,25 @@ class Pacman extends Shape implements MovingComponent {
       console.log('Ran Into a Wall');
       return false;
     } else if (component === 1) {
-      console.log('Ran into a ghost');
+      if (this.canEatGhost) {
+        console.log('Eat the Ghost and Update Points');
+      } else {
+        // Destroy yourself since you got attacked by a ghost
+      }
     } else if (component === 2) {
       console.log('Eat Token');
       this.eatToken(row, col);
       engine.points += 10;
       return true;
     } else if (component === 3) {
-      console.log('Power Up');
+      console.log('Ran into Power Up');
+
+      // Change Pacmans State so It Can Eat the Ghost
+      this.canEatGhost = true;
+
+      console.log(this);
+
+      return true;
     } else {
       console.log('Empty Space');
 
@@ -74,12 +87,16 @@ class Pacman extends Shape implements MovingComponent {
     }
   }
 
-  eatToken(row, col) {
+  // MARK: Eat the Token
+  private eatToken(row, col): void {
     let space = Utils.getElementAtSpecifiedID(row, col);
     space.firstChild.remove();
     space.appendChild(this.element.firstChild);
     this.element = space;
   }
+
+  // MARK: Eat the Power Token
+  private eatPowerToken(): void {}
 
   // MARK: Move Pacman
   movePacman({ world, engine }) {

@@ -9,7 +9,7 @@ class GameEngine {
   private isGameStarted: boolean = false;
 
   async testMovingGhosts() {
-    console.log('(11): Changing Ghost Direction and Moving Automatically');
+    // console.log('(11): Changing Ghost Direction and Moving Automatically');
 
     let i = 0;
     while (true) {
@@ -32,27 +32,30 @@ class GameEngine {
       e.preventDefault();
 
       if (e.code === 'KeyT' && !this.isGameStarted) {
-        console.log('GE-29: Game Started');
+        // console.log('GE-29: Game Started');
         this.isGameStarted = true;
+
+        // Logic to Init Ghosts
         this.testMovingGhosts();
       } else if (this.isGameStarted === true && e.code === 'Space') {
         // For Testing Only Manually Move Pacman
-        // this.movingGameComponents['pacman'].movePacman({
-        //   world: this.world,
-        //   engine: this,t
-        // });
+        this.movingGameComponents['pacman'].movePacman({
+          world: this.world,
+          engine: this,
+        });
         // console.log('See if mutated original: ', this.points, this.world);
       } else if (this.isGameStarted === true) {
         // Test Pacman
         // ---------------------d
-        // this.movingGameComponents['pacman'].changeDirection(e.code);
+        this.movingGameComponents['pacman'].changeDirection(e.code);
       }
     });
   }
 
+  // ============================================================================
   // MARK: Init Game Engine
   init(): void {
-    console.log('Initilizing Pacman Game....');
+    // console.log('Initilizing Pacman Game....');
 
     // Get a New World Game Layout
     this.world = new WorldLayout();

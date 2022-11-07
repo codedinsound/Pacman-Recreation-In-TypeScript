@@ -1,10 +1,3 @@
-// -1 - Empty
-// 0  - Pacman
-// 1  - Ghost
-// 2  - Token
-// 3  - Power Up
-// 4  - Wall
-
 import GameComponentsFactory from '../Game Components/GameComponenFactory';
 import { Shape } from '../UI';
 import Utils from '../Utils';
@@ -22,6 +15,12 @@ class WorldLayout {
   }
 
   public loadNewGameGrid(): number[][] {
+    // -1 - Empty
+    // 0  - Pacman
+    // 1  - Ghost
+    // 2  - Token
+    // 3  - Power Up
+    // 4  - Wall
     return [
       [3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3],
       [2, 4, 4, 2, 4, 4, 4, 2, 4, 4, 4, 2, 4, 4, 2],
@@ -29,7 +28,7 @@ class WorldLayout {
       [2, 4, 2, 4, 4, 2, 4, 4, 4, 2, 4, 4, 2, 4, 2],
       [2, 2, 2, 2, 4, 2, 4, 4, 4, 2, 4, 2, 2, 2, 2],
       [4, 4, 4, 2, 4, 2, 2, 4, 2, 2, 4, 2, 4, 4, 4],
-      [4, 4, 4, 2, 2, -1, 1, 2, 2, 2, 2, 2, 4, 4, 4],
+      [4, 4, 4, 2, 2, -1, 2, 2, 2, 2, 2, 2, 4, 4, 4],
       [2, 2, 2, 2, 4, 2, 4, 4, 4, 2, 4, 2, 2, 2, 2],
       [4, 4, 4, 2, 4, 2, 2, -1, 2, 2, 4, 2, 4, 4, 4],
       [4, 4, 4, 2, 4, 4, 4, 2, 4, 4, 4, 2, 4, 4, 4],
@@ -37,7 +36,7 @@ class WorldLayout {
       [2, 4, 4, 4, 2, 4, 4, 4, 4, 4, 2, 4, 4, 4, 2],
       [2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2],
       [4, 2, 2, 2, 4, 4, 2, 4, 2, 4, 4, 2, 2, 2, 4],
-      [3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3],
+      [3, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 3],
     ];
   }
 
@@ -58,12 +57,14 @@ class WorldLayout {
     return this.matrixGameGrid[row][col];
   }
 
+  // ======================================================================
+  // MARK: Populates the Game Grid
   public populateHTMLGameGrid(): any {
     const coordinates = { x: 0, y: 0 };
 
     let shape: Shape;
-    let ghostCounter = 0;
-    let ghostColors = ['black', 'pink', 'red'];
+    let ghostCounter: number = 0;
+    let ghostColors: string[] = ['black', 'pink', 'red'];
 
     let movingComponents: Shape = {} as Shape;
 
@@ -89,13 +90,8 @@ class WorldLayout {
         }
 
         this.htmlGridLayout.appendChild(shape.getHTMLElement);
-
-        // coordinates.x += 32;
       }
-      // coordinates.x = 0;
-      // coordinates.y += 24;
     }
-
     return movingComponents;
   }
 }
